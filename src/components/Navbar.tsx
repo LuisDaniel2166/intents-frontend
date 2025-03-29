@@ -25,7 +25,7 @@ const Navbar = ({ links = LINKS_HEADER }: Props) => {
           <Link key={i} href={route.href}>
             <Button
               radius="full"
-              color="gray"
+              color="yellow"
               highContrast
               variant={isCurrentPage ? "solid" : "soft"}
               className={clsx(
@@ -33,9 +33,7 @@ const Navbar = ({ links = LINKS_HEADER }: Props) => {
                 TURN_OFF_APPS || route.comingSoon
                   ? "pointer-events-none text-gray-500"
                   : "cursor-pointer",
-                isCurrentPage
-                  ? "text-white dark:text-black-400"
-                  : "bg-transparent"
+                isCurrentPage ? "text-white dark:text-black-400" : "bg-white"
               )}
               asChild
             >
