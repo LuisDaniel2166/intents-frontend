@@ -26,13 +26,7 @@ const Header = () => {
             <Navbar />
           </div>
           <div className="flex justify-end items-center gap-4 lg:basis-[360px]">
-            {whitelabelTemplate === "turboswap" && (
-              <div className="hidden md:block">
-                <AddTurboChainButton />
-              </div>
-            )}
             <ConnectWallet />
-            <Settings />
           </div>
         </div>
       </header>

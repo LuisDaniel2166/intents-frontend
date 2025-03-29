@@ -59,241 +59,26 @@ const ConnectWallet = () => {
         >
           <Text size="1">How do you want to sign in?</Text>
           <div className="w-full grid grid-cols-1 gap-4 mt-4">
-            <Text size="1" color="gray">
-              Popular options
-            </Text>
-
-            {isSupportedByBrowser() && (
-              <Button
-                onClick={() => handlePasskey()}
-                size="4"
-                radius="medium"
-                variant="soft"
-                color="gray"
-                className="px-2.5"
-              >
-                <div className="w-full flex items-center justify-start gap-2">
-                  <Image
-                    src="/static/icons/wallets/webauthn.svg"
-                    alt=""
-                    width={36}
-                    height={36}
-                  />
-                  <Text size="2" weight="bold">
-                    Passkey
-                  </Text>
-                </div>
-              </Button>
-            )}
-
-            {whitelabelTemplate === "turboswap" ? (
-              <>
-                {/* WalletConnect */}
-                {connectors
-                  .filter((c) => c.id === "walletConnect")
-                  .map((connector) => (
-                    <Button
-                      key={connector.uid}
-                      onClick={() => handleWalletConnect(connector)}
-                      size="4"
-                      radius="medium"
-                      variant="soft"
-                      color="gray"
-                      className="px-2.5"
-                    >
-                      <div className="w-full flex items-center justify-start gap-2">
-                        <WalletIcon connector={connector} />
-                        <Text size="2" weight="bold">
-                          {renderWalletName(connector)}
-                        </Text>
-                      </div>
-                    </Button>
-                  ))}
-
-                {/* EIP-6963 detected wallets */}
-                {connectors
-                  .filter((c) => c.type === "injected" && c.id !== "injected")
-                  .map((connector) => (
-                    <Button
-                      key={connector.uid}
-                      onClick={() => handleWalletConnect(connector)}
-                      size="4"
-                      radius="medium"
-                      variant="soft"
-                      color="gray"
-                      className="px-2.5"
-                    >
-                      <div className="w-full flex items-center justify-start gap-2">
-                        <WalletIcon connector={connector} />
-                        <Text size="2" weight="bold">
-                          {renderWalletName(connector)}
-                        </Text>
-                      </div>
-                    </Button>
-                  ))}
-
-                <Text size="1" color="gray">
-                  Other options
+            <Button
+              onClick={handleNearWalletSelector}
+              size="4"
+              radius="medium"
+              variant="soft"
+              color="gray"
+              className="px-2.5"
+            >
+              <div className="w-full flex items-center justify-start gap-2">
+                <Image
+                  src="/static/icons/wallets/near-wallet-selector.svg"
+                  alt="Near Wallet Selector"
+                  width={36}
+                  height={36}
+                />
+                <Text size="2" weight="bold">
+                  NEAR Wallet
                 </Text>
-
-                <Button
-                  onClick={handleNearWalletSelector}
-                  size="4"
-                  radius="medium"
-                  variant="soft"
-                  color="gray"
-                  className="px-2.5"
-                >
-                  <div className="w-full flex items-center justify-start gap-2">
-                    <Image
-                      src="/static/icons/wallets/near-wallet-selector.svg"
-                      alt="Near Wallet Selector"
-                      width={36}
-                      height={36}
-                    />
-                    <Text size="2" weight="bold">
-                      NEAR Wallet
-                    </Text>
-                  </div>
-                </Button>
-
-                <Button
-                  onClick={handleSolanaWalletSelector}
-                  size="4"
-                  radius="medium"
-                  variant="soft"
-                  color="gray"
-                  className="px-2.5"
-                >
-                  <div className="w-full flex items-center justify-start gap-2">
-                    <Image
-                      src="/static/icons/wallets/solana-logo-mark.svg"
-                      alt="Solana Wallet Selector"
-                      width={36}
-                      height={36}
-                    />
-                    <Text size="2" weight="bold">
-                      Solana Wallet
-                    </Text>
-                  </div>
-                </Button>
-
-                {/* Other non-EIP-6963 connectors */}
-                {connectors
-                  .filter(
-                    (c) => c.id !== "walletConnect" && c.type !== "injected"
-                  )
-                  .map((connector) => (
-                    <Button
-                      key={connector.uid}
-                      onClick={() => handleWalletConnect(connector)}
-                      size="4"
-                      radius="medium"
-                      variant="soft"
-                      color="gray"
-                      className="px-2.5"
-                    >
-                      <div className="w-full flex items-center justify-start gap-2">
-                        <WalletIcon connector={connector} />
-                        <Text size="2" weight="bold">
-                          {renderWalletName(connector)}
-                        </Text>
-                      </div>
-                    </Button>
-                  ))}
-              </>
-            ) : (
-              // Original order for other templates
-              <>
-                <Button
-                  onClick={handleSolanaWalletSelector}
-                  size="4"
-                  radius="medium"
-                  variant="soft"
-                  color="gray"
-                  className="px-2.5"
-                >
-                  <div className="w-full flex items-center justify-start gap-2">
-                    <Image
-                      src="/static/icons/wallets/solana-logo-mark.svg"
-                      alt="Solana Wallet Selector"
-                      width={36}
-                      height={36}
-                    />
-                    <Text size="2" weight="bold">
-                      Solana Wallet
-                    </Text>
-                  </div>
-                </Button>
-
-                {whitelabelTemplate !== "solswap" && (
-                  <>
-                    <Button
-                      onClick={handleNearWalletSelector}
-                      size="4"
-                      radius="medium"
-                      variant="soft"
-                      color="gray"
-                      className="px-2.5"
-                    >
-                      <div className="w-full flex items-center justify-start gap-2">
-                        <Image
-                          src="/static/icons/wallets/near-wallet-selector.svg"
-                          alt="Near Wallet Selector"
-                          width={36}
-                          height={36}
-                        />
-                        <Text size="2" weight="bold">
-                          NEAR Wallet
-                        </Text>
-                      </div>
-                    </Button>
-                    {connectors.slice(0, 1).map((connector) => (
-                      <Button
-                        key={connector.uid}
-                        onClick={() => handleWalletConnect(connector)}
-                        size="4"
-                        radius="medium"
-                        variant="soft"
-                        color="gray"
-                        className="px-2.5"
-                      >
-                        <div className="w-full flex items-center justify-start gap-2">
-                          <WalletIcon connector={connector} />
-                          <Text size="2" weight="bold">
-                            {renderWalletName(connector)}
-                          </Text>
-                        </div>
-                      </Button>
-                    ))}
-                    <Text size="1" color="gray">
-                      Other options
-                    </Text>
-                    {connectors
-                      .slice(1)
-                      .filter((connector) => connector.id !== "injected")
-                      .map((connector) => (
-                        <Button
-                          key={connector.uid}
-                          onClick={() => handleWalletConnect(connector)}
-                          size="4"
-                          radius="medium"
-                          variant="soft"
-                          color="gray"
-                          className="px-2.5"
-                        >
-                          <div className="w-full flex items-center justify-start gap-2">
-                            <WalletIcon connector={connector} />
-                            <Text size="2" weight="bold">
-                              {renderWalletName(connector)}
-                            </Text>
-                          </div>
-                        </Button>
-                      ))}
-                  </>
-                )}
-              </>
-            )}
+              </div>
+            </Button>
           </div>
         </Popover.Content>
       </Popover.Root>
