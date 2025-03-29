@@ -13,6 +13,11 @@ export const settings: Settings = {
       description:
         "Seamlessly manage your cross-chain deposits with our efficient DeFi hub. Join us to experience unparalleled ease and security.",
     },
+    agent: {
+      title: "NEAR Intents x Zcash AI Agent",
+      description:
+        "Interact with the AI ​​agent and make your movements using Intents.",
+    },
     jobs: {
       title: "Careers - Join Our Team",
       description:

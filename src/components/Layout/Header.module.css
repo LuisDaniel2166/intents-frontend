@@ -1,5 +1,5 @@
 .header {
-    @apply bg-black;
+    @apply bg-black-950;
 }
 
 :global(.tmpl-solswap) .header {
